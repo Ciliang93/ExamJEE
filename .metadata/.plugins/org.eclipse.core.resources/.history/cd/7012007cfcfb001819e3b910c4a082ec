@@ -1,0 +1,28 @@
+package be.helha.paniers.usecasesimpl;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+
+import be.helha.paniers.domaine.Panier;
+import be.helha.paniers.domaine.Reservation;
+import be.helha.paniers.usecases.GestionReservations;
+
+@Stateless
+public class GestionReservationsImpl  implements GestionReservations{
+
+	@Override
+	public List<Panier> listePaniersTries() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Reservation enregistrer(Reservation reservation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// à compléter
+
+}

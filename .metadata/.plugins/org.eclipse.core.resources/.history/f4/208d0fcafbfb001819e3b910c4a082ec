@@ -1,0 +1,53 @@
+package be.helha.paniers.daoimpl;
+
+import java.util.List;
+
+import be.helha.paniers.dao.PanierDao;
+import be.helha.paniers.domaine.Panier;
+
+public class PanierDaoImpl extends DaoImpl<Integer,Panier> implements PanierDao {
+
+	@Override
+	public Panier rechercher(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Panier enregistrer(Panier entite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Panier mettreAJour(Panier entite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Panier recharger(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void supprimer(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Panier> lister() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Panier> listeTriee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// à compléter
+}

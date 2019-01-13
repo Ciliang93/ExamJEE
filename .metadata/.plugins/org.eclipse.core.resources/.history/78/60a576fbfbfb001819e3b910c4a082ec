@@ -1,0 +1,22 @@
+package be.helha.paniers.daoimpl;
+
+import java.util.List;
+
+import be.helha.paniers.dao.PanierDao;
+import be.helha.paniers.domaine.Panier;
+
+public class PanierDaoImpl extends DaoImpl<Integer,Panier> implements PanierDao {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public List<Panier> listeTriee() {
+		try {
+			
+		} catch(Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+
+}

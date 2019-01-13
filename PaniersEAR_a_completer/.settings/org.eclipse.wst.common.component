@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="PaniersEAR_a_completer">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="PaniersJSP_a_completer.war" deploy-path="/" handle="module:/resource/PaniersJSP_a_completer/PaniersJSP_a_completer">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="PaniersEJB_a_completer.jar" deploy-path="/" handle="module:/resource/PaniersEJB_a_completer/PaniersEJB_a_completer">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

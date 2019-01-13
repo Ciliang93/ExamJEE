@@ -1,0 +1,9 @@
+package be.helha.paniers.domaine;
+
+@Entity
+@Table(name="paniers",schema="paniers")
+public class Panier{
+
+	// à compléter
+
+}

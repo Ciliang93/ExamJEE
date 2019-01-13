@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+C:\Users\mar98\OneDrive\Bureau\Cours 2018 - 2019\PreparationExamen2018\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2339610376.index
+616538526.index
+3685672601.index
+2832161057.index
+1862853698.index
+954029090.index
