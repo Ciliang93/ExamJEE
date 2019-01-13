@@ -1,0 +1,78 @@
+package be.helha.paniers.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import be.helha.paniers.domaine.Constantes;
+import be.helha.paniers.domaine.Panier;
+import be.helha.paniers.domaine.Reservation;
+import be.helha.paniers.usecases.GestionReservations;
+import javafx.css.ParsedValue;
+
+@WebServlet(urlPatterns="/index.html", name="index.html")
+public class ReservationPaniers  extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	private GestionReservations gestionReservation;
+	private int i = 0;
+	private Panier panierAReserve = null;
+	String message = "";
+	boolean operation = true;
+	List<Panier> listPanier;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		message = "Sélectionnez les paniers.";
+		operation = true;
+		listPanier = (List<Panier>) gestionReservation.listePaniersTries();
+		request.setAttribute(Constantes.ATT_LISTE_PANIERS, listPanier);
+		request.setAttribute(Constantes.ATT_MESSAGE, message);
+		request.setAttribute(Constantes.ATT_OPERATION_REUSSIE, true);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			int paramValue = Integer.parseInt(request.getParameter(Constantes.PARAM_PANIERS_RESERVES));
+			String utilisateur = request.getParameter(Constantes.PARAM_NOM);
+			String telephone = request.getParameter(Constantes.PARAM_TELEPHONE);
+			Calendar dateReservation = Calendar.getInstance();
+			listPanier = (List<Panier>) gestionReservation.listePaniersTries();
+			
+			for(Panier p : listPanier) {
+				if(i == paramValue) panierAReserve = p;					
+				i++;
+			}
+			
+			Reservation reservation = new Reservation(utilisateur,telephone,dateReservation,panierAReserve);
+			Reservation reservationDb = gestionReservation.enregistrer(reservation);
+			
+			message = "La réservation a été enregistrée. Voici son numéro : "+reservationDb.getId();
+			operation = true;
+			request.setAttribute(Constantes.ATT_RESERVATION, reservationDb);
+			
+			afficherVue(utilisateur,telephone,listPanier,message,operation,request,response);
+	}
+
+
+	private void afficherVue(String nom, String telephone, List<Panier> paniersTries, String message, boolean operationReussie, ServletRequest request, ServletResponse response)
+			throws ServletException, IOException {
+		request.setAttribute(Constantes.ATT_NOM, nom);
+		request.setAttribute(Constantes.ATT_TELEPHONE, telephone);
+		request.setAttribute(Constantes.ATT_LISTE_PANIERS, paniersTries);
+		request.setAttribute(Constantes.ATT_MESSAGE, message);
+		request.setAttribute(Constantes.ATT_OPERATION_REUSSIE, operationReussie);
+		this.getServletContext().getNamedDispatcher(Constantes.VUE_INDEX).forward(request, response);
+	}
+
+}

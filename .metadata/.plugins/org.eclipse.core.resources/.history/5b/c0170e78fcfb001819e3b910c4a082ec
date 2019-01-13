@@ -1,0 +1,10 @@
+package be.helha.paniers.usecasesimpl;
+
+import javax.ejb.Stateless;
+
+@Stateless
+public class GestionReservationsImpl  implements GestionReservation{
+	
+	// à compléter
+
+}

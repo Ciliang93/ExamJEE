@@ -1,0 +1,87 @@
+package be.helha.paniers.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import be.helha.paniers.domaine.Constantes;
+import be.helha.paniers.domaine.Panier;
+import be.helha.paniers.domaine.Reservation;
+import be.helha.paniers.usecases.GestionReservations;
+import javafx.css.ParsedValue;
+
+@WebServlet(urlPatterns="/index.html", name="index.html")
+public class ReservationPaniers  extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	private GestionReservations gestionReservation;
+	private int i = 0;
+	private Panier panierAReserve = null;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setAttribute(Constantes.ATT_LISTE_PANIERS, gestionReservation.listePaniersTries());
+		request.setAttribute(Constantes.ATT_OPERATION_REUSSIE, true);
+		request.setAttribute(Constantes.ATT_MESSAGE, "Sélectionnez les paniers.");
+		this.getServletContext().getNamedDispatcher(Constantes.VUE_INDEX).forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+			String message = "";
+			boolean operation = true;
+			String paramValue = request.getParameter(Constantes.PARAM_PANIERS_RESERVES);
+			String utilisateur = request.getParameter(Constantes.PARAM_NOM);
+			String telephone = request.getParameter(Constantes.PARAM_TELEPHONE);
+			List<Panier> listPanier = (List<Panier>) gestionReservation.listePaniersTries();
+			Calendar dateReservation = Calendar.getInstance();
+			
+			if(utilisateur == null || utilisateur.trim().isEmpty()) {
+				message = "Veuillez introduire un nom.";
+				operation = false;
+			} else if(telephone == null || telephone.trim().isEmpty()) {
+				message = "Veuillez introduire un numéro de téléphone.";
+				operation = false;
+			} else if(paramValue == null || paramValue.trim().isEmpty()) {
+				message = "Aucun panier sélectionner";
+				operation = true;
+			}
+			
+			for(Panier p : listPanier) {
+				if(i == Integer.parseInt(paramValue) panierAReserve = p;					
+				i++;
+			}
+			
+			Reservation reservation = new Reservation(utilisateur,telephone,dateReservation,panierAReserve);
+			Reservation reservationDb = gestionReservation.enregistrer(reservation);
+			operation = true;
+			message = "La réservation a été enregistrée. Voici son numéro : " + reservationDb.getId();
+			request.setAttribute(Constantes.ATT_RESERVATION, reservationDb);
+			request.setAttribute(Constantes.ATT_MESSAGE, message);
+			request.setAttribute(Constantes.ATT_OPERATION_REUSSIE, operation);
+			request.setAttribute(Constantes.ATT_LISTE_PANIERS, listPanier);
+			
+			this.getServletContext().getNamedDispatcher(Constantes.VUE_INDEX).forward(request, response);
+	}
+
+
+	private void afficherVue(String nom, String telephone, List<Panier> paniersTries, String message,
+			boolean operationReussie, ServletRequest request, ServletResponse response)
+			throws ServletException, IOException {
+		
+		// à compléter
+	}
+
+}

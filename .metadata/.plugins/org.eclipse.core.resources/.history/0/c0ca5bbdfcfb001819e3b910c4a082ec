@@ -1,0 +1,9 @@
+package be.helha.paniers.daoimpl;
+
+import be.helha.paniers.dao.PanierDao;
+import be.helha.paniers.domaine.Panier;
+
+public class ReservationDaoImpl extends DaoImpl<Integer,Panier> implements PanierDao{
+
+	// à compléter
+}

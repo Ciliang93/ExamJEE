@@ -1,0 +1,8 @@
+package be.helha.paniers.daoimpl;
+
+import be.helha.paniers.dao.ReservationDao;
+import be.helha.paniers.domaine.Reservation;
+
+public class ReservationDaoImpl extends DaoImpl<Integer,Reservation> implements ReservationDao {
+	private static final long serialVersionUID = 1L;
+}

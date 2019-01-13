@@ -1,0 +1,14 @@
+package be.helha.paniers.domaine;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="reservations",schema="paniers")
+public class Reservation implements Serializable {
+	
+	// à compléter
+	
+}

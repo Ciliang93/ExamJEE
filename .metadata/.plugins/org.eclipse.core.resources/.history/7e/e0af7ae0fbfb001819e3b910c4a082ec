@@ -1,0 +1,17 @@
+package be.helha.paniers.daoimpl;
+
+import java.util.List;
+
+import be.helha.paniers.dao.PanierDao;
+import be.helha.paniers.domaine.Panier;
+
+public class PanierDaoImpl extends DaoImpl<Integer,Panier> implements PanierDao {
+
+	@Override
+	public List<Panier> listeTriee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}
